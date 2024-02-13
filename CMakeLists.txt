@@ -9,6 +9,7 @@ set(CMAKE_AUTOUIC ON)
 
 find_package(Qt6 COMPONENTS
         Core
+        WebSockets
         REQUIRED)
 
 add_executable(MinecraftWssLib App/main.cpp)
