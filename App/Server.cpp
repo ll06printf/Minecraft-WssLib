@@ -20,8 +20,9 @@ QString makeEventMessage(const QString &eventName, QUuid id) {
 		"messageType": "commandRequest"
 	}}
 }})";
+    auto idString = id.toString().sliced(1, 36);
     return QString::fromStdString(
-                std::format(messageTemplate, eventName.toStdString(), id.toString().toStdString(), version)
+                std::format(messageTemplate, eventName.toStdString(), idString.toStdString(), version)
             );
 }
 
@@ -41,9 +42,9 @@ QString makeCommandMessage(const QString &command, QUuid id) {
 		"messageType": "commandRequest"
 	}}
 }})";
-
+    auto idString = id.toString().sliced(1, 36);
     return QString::fromStdString(
-            std::format(messageTemplate, command.toStdString(), id.toString().toStdString(), version)
+            std::format(messageTemplate, command.toStdString(),idString.toStdString(), version)
     );
 }
 
