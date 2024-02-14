@@ -8,24 +8,16 @@
 #include <QWebSocketServer>
 #include <QWebSocket>
 #include <QList>
-#include <QFile>
-#include <QTextStream>
+#include <QDir>
+#include <QUuid>
 
-constexpr auto testMessage = R"({
-	"body": {
-		"origin": {
-			"type": "player"
-		},
-		"commandLine": "say Hello",
-		"version": 1
-	},
-	"header": {
-		"requestId": "00000000-0000-0000-0000-000000000000",
-		"messagePurpose": "commandRequest",
-		"version": 1,
-		"messageType": "commandRequest"
-	}
-})";
+const QString eventToScribe[] = {
+        "PlayerMessage"
+};
+const QString commandToRun[] = {
+        "list"
+};
+constexpr int version = 17039360;
 
 class Server : public QObject{
     Q_OBJECT
@@ -34,7 +26,7 @@ public:
     ~Server() override;
 
     bool listen(const QHostAddress &address=QHostAddress::Any, quint16 port=6600);
-    void setLogFile(QIODevice *path);
+    void setLogDir(const QDir &dir);
 
 signals:
     void closed();
@@ -46,7 +38,8 @@ public slots:
     void errorLog();
 
 private:
-    QTextStream logStream;
+    QDir logDir;
+    QMap<QUuid, QString> descriptor;
     QWebSocketServer *serverHandle;
     QList<QWebSocket *> clients;
 };
