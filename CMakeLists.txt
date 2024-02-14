@@ -12,9 +12,12 @@ find_package(Qt6 COMPONENTS
         WebSockets
         REQUIRED)
 
-add_executable(MinecraftWssLib App/main.cpp)
+add_executable(MinecraftWssLib App/main.cpp
+        App/Server.cpp
+        App/Server.h)
 target_link_libraries(MinecraftWssLib
         Qt::Core
+        Qt::WebSockets
 )
 
 if (WIN32 AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
