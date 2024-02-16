@@ -53,5 +53,8 @@ compile_commands.json
 
 *_qmlcache.qrc
 
-#CMake build directory
+# CMake build directory
 cmake-build-*/
+
+# Clion configure
+.idea/
