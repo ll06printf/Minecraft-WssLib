@@ -12,6 +12,12 @@ find_package(Qt6 COMPONENTS
         WebSockets
         REQUIRED)
 
+add_subdirectory(lib)
+target_link_libraries(MSSLib PUBLIC
+        Qt::Core
+        Qt::WebSockets
+)
+
 add_executable(MinecraftWssLib App/main.cpp)
 target_link_libraries(MinecraftWssLib
         Qt::Core
