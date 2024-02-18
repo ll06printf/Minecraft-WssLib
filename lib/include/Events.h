@@ -11,7 +11,11 @@ namespace WSSLib {
     Q_NAMESPACE
 
     enum class EventType {
-        NullEvent,
+        NullEvent = 0,
+        // The Event Caused by Controller
+        InitialEvent,
+        EndEvent,
+        // The Event Caused by WSServer.
         EndOfDay,
         AgentCommand,
         AgentCreated,
@@ -38,6 +42,7 @@ namespace WSSLib {
         PortalBuilt,
         PortalUsed,
     };
+    constexpr EventType maxPredefinedEvent = EventType::PortalUsed;
 
     Q_ENUM_NS(EventType)
 

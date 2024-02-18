@@ -27,7 +27,8 @@ namespace WSSLib {
         virtual void subscribe(const QString &eventName) = 0;
         virtual void unsubscribe(enum WSSLib::EventType t) = 0;
     signals:
-        void providerTransform(Provider *);
+        void providerTransform(WSSLib::Provider *);
+        void eventRaised(WSSLib::Event *e);
 
     protected:
         QSet<EventType> SubscribedEvents;
