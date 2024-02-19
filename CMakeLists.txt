@@ -13,7 +13,7 @@ find_package(Qt6 COMPONENTS
         REQUIRED)
 
 add_subdirectory(lib)
-target_link_libraries(MSSLib PUBLIC
+target_link_libraries(WSSLib PUBLIC
         Qt::Core
         Qt::WebSockets
 )

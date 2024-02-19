@@ -10,6 +10,10 @@
 namespace WSSLib {
     Q_NAMESPACE
 
+    Provider::Provider(QObject *parent): QObject(parent) {
+
+    }
+
     QSet<EventType> Provider::getSubscribedEvents() {
         return SubscribedEvents;
     }
@@ -17,6 +21,11 @@ namespace WSSLib {
     void Provider::subscribe(enum WSSLib::EventType t) {
         auto eventName = QMetaEnum::fromType<enum WSSLib::EventType>();
         subscribe(eventName.valueToKey(static_cast<int>(t)));
+    }
+
+    void Provider::unsubscribe(enum WSSLib::EventType t) {
+        auto eventName = QMetaEnum::fromType<enum WSSLib::EventType>();
+        unsubscribe(eventName.valueToKey(static_cast<int>(t)));
     }
 
 } // WSSLib

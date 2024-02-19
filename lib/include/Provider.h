@@ -8,13 +8,13 @@
 #include <QObject>
 #include <QString>
 #include <QSet>
-#include <QPointer>
+#include <QSharedPointer>
 
 #include "Events.h"
 
 namespace WSSLib {
     Q_NAMESPACE
-    class Provider: QObject {
+    class Provider: public QObject {
         Q_OBJECT
     public:
         ~Provider() override = default;
@@ -22,13 +22,20 @@ namespace WSSLib {
         QSet<EventType> getSubscribedEvents() ;
     public slots:
         virtual void runCommand(const QString &command) = 0;
-        void subscribe(WSSLib::Event *e) { subscribe(e->getType()); }
-        virtual void subscribe(enum WSSLib::EventType t) = 0;
+
+        virtual void subscribe(enum WSSLib::EventType t);
         virtual void subscribe(const QString &eventName) = 0;
-        virtual void unsubscribe(enum WSSLib::EventType t) = 0;
+
+        virtual void unsubscribe(enum WSSLib::EventType t);
+        virtual void unsubscribe(const QString &eventName) = 0;
+
     signals:
         void providerTransform(WSSLib::Provider *);
-        void eventRaised(WSSLib::Event *e);
+        void eventRaised(QSharedPointer<const WSSLib::Event> event);
+
+    protected:
+        explicit Provider(QObject *parent = nullptr);
+
 
     protected:
         QSet<EventType> SubscribedEvents;

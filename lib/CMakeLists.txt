@@ -1,13 +1,15 @@
-add_library(MSSLib STATIC
-        MSSLib/Provider.cpp
+add_library(WSSLib STATIC
+        WSSLib/Provider.cpp
         include/Provider.h
         include/Events.h
-        MSSLib/Controller.cpp
+        WSSLib/Controller.cpp
         include/Controller.h
-        MSSLib/Rule.cpp
+        WSSLib/Rule.cpp
         include/Rule.h
+        WSSLib/WSSProvider.cpp
+        include/WSSProvider.h
 )
 
-target_include_directories(MSSLib PUBLIC
+target_include_directories(WSSLib PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include
 )

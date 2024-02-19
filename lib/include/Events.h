@@ -49,7 +49,7 @@ namespace WSSLib {
     class Event {
     public:
         virtual ~Event() = default;
-        enum EventType getType() {return type;}
+        [[nodiscard]] enum EventType getType() const {return type;}
     protected:
         enum EventType type = EventType::NullEvent;
     };

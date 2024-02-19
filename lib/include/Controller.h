@@ -7,23 +7,33 @@
 
 #include <QObject>
 #include <QString>
+#include <QSharedPointer>
 
 #include "Events.h"
 #include "Rule.h"
 
 namespace WSSLib {
 
-    class Controller: QObject {
+    class Controller: public QObject {
         Q_OBJECT
     public:
         ~Controller() override = default;
+        static Controller* getInstance();
+
         virtual void run() = 0;
         virtual void config(QString item, QVariant value) = 0;
+
     public slots:
         virtual void stop() = 0;
-        virtual void setupRule(WSSLib::Rule *) = 0;
+        virtual void setupRule() = 0;
+        virtual void dispatchEvent(QSharedPointer<const WSSLib::Event> event) = 0;
+
     signals:
-        void eventRaised(WSSLib::Event *);
+        void eventRaised(QSharedPointer<const WSSLib::Event> event);
+        void stoped();
+
+    protected:
+        static Controller *instance;
     };
 
 } // WSSLib

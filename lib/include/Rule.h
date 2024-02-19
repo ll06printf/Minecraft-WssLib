@@ -5,19 +5,21 @@
 #ifndef MINECRAFTWSSLIB_RULE_H
 #define MINECRAFTWSSLIB_RULE_H
 
-#include <QObject>
+#include <QSharedPointer>
 
 #include "Events.h"
 
 namespace WSSLib {
 
-    class Rule: QObject {
-        Q_OBJECT
+    class Rule {
     public:
-        ~Rule() override = default;
-    public slots:
-        virtual void accept(WSSLib::Event *) = 0;
+        virtual ~Rule() = default;
+
+        virtual QList<WSSLib::EventType> observedEvent() = 0;
+
+        virtual void accept(QSharedPointer<const WSSLib::Event> event) = 0;
     };
+
 
 } // WSSLib
 
